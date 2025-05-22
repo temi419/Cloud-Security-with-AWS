@@ -19,7 +19,7 @@ In this project, I will demonstrate how AWS can be used to give an intern limite
 
 ### Tools and concepts
 
-he services I used were very helpful in learning the fundamentals of AWS, its structure, and core functionalities. I gained a solid understanding of how IAM and EC2 operate, particularly in relation to JSON policies, user and user group management, and launching and managing instances.
+The services I used were very helpful in learning the fundamentals of AWS, its structure, and core functionalities. I gained a solid understanding of how IAM and EC2 operate, particularly in relation to JSON policies, user and user group management, and launching and managing instances.
 ### Project reflection
 
 This project took me approximately 3 hours to complete. The most challenging part was troubleshooting an issue where the StopInstance function kept returning an "Access Denied" error for the intern. The most rewarding part was finally identifying the root cause — a misconfiguration within the policy code — and resolving it successfully. It was a great learning experience in understanding IAM permissions more deeply.
@@ -104,7 +104,7 @@ I attached the policy I created to this user group, which means attaching a poli
 
 ## Logging in as an IAM User
 
-The first way is email credentials second is CSV file 
+The first way is email credentials. second is CSV file 
 
 Once I logged in as my IAM user, I noticed access was denied This was because of the policies
 
@@ -136,7 +136,9 @@ Next, when I attempted to stop the development instance, the action was successf
 ## The IAM Policy Simulator
 
 ### How I used the simulator
+I used the IAM Policy Simulator to test and validate the permissions defined in my JSON policy before applying them in a live environment. The simulator allowed me to simulate actions like ec2:StopInstances and ec2:DescribeInstances to confirm whether they would be allowed or denied based on the current policy configuration.
 
+By selecting the intern user and testing various EC2 actions, I was able to verify that the policy correctly allowed actions only on instances tagged with Env=development while denying access to others — like the production instance. This helped me catch misconfigurations early and gain a better understanding of how AWS evaluates policies.
 ---
 
 ---

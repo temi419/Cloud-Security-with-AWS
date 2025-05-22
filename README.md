@@ -5,7 +5,7 @@
 **Project Link:** [View Project](http://learn.nextwork.org/projects/aws-security-iam)
 
 **Author:** David Adeleye  
-**Email:** davidadley58@gmail.com
+**Email:** dadeleye088@gmail.com
 
 ---
 

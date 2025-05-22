@@ -19,22 +19,18 @@ In this project, I will demonstrate how AWS can be used to give an intern limite
 
 ### Tools and concepts
 
-Services I used were verr helpful in learning the basics of AWS origin and its functions. The concepts I learnt include how IAM and EC2 operate for JSON policies, user/usergroups, and instances. 
-
+he services I used were very helpful in learning the fundamentals of AWS, its structure, and core functionalities. I gained a solid understanding of how IAM and EC2 operate, particularly in relation to JSON policies, user and user group management, and launching and managing instances.
 ### Project reflection
 
-This project took me approximately 3 hours The most challenging part was trying to figure out why the StopInstance function kept saying denied for the intern. It was most rewarding to figure out what i did wrong which was a problem within the code. 
+This project took me approximately 3 hours to complete. The most challenging part was troubleshooting an issue where the StopInstance function kept returning an "Access Denied" error for the intern. The most rewarding part was finally identifying the root cause — a misconfiguration within the policy code — and resolving it successfully. It was a great learning experience in understanding IAM permissions more deeply.
 
 ---
 
 ## Tags
 
- tags in AWS are basically just labels you attach to your resources (like EC2 instances, S3 buckets, IAM users, etc.) to help you organize and control them.
+ In AWS, tags are essentially labels that you attach to resources (such as EC2 instances, S3 buckets, IAM users, etc.) to help with organization, automation, and access control.
 
-
-
-The tag I’ve used on my EC2 instances is called Env. The value I’ve assigned for my instances are development.
-
+For my EC2 instances, I used a tag with the key Env and assigned it the value development. This helps clearly identify the purpose of the instances and makes it easier to manage them in a larger environment.
 
 
 
@@ -50,17 +46,20 @@ The tag I’ve used on my EC2 instances is called Env. The value I’ve assigned
 
 ## IAM Policies
 
- IAM (Identity and Access Management) Policies in AWS are used to control who can do what to which resources.
+IAM (Identity and Access Management) Policies in AWS are used to define who has permission to perform what actions on which resources. They are essential for managing access control and maintaining security within your AWS environment.
 
 ### The policy I set up
 
-I set up the policy using JSON. It gave me more control over the exact permissions, conditions, and tags — especially for setting rules like only allowing actions on EC2 instances with a specific tag (Env=development).
+I created the IAM policy using JSON, which gave me precise control over permissions, conditions, and tagging. This approach allowed me to set specific rules, such as only permitting actions on EC2 instances that have a tag with Env=development.
 
-The effect of my policy is to allow all EC2 actions, but only on instances that are tagged with Env=development. It also allows read-only access to all EC2 resources through ec2:Describe*. 
+The policy is designed to allow all EC2 actions, but only on instances tagged with Env=development. Additionally, it grants read-only access to all EC2 resources by including permissions under ec2:Describe*.
 
 ### When creating a JSON policy, you have to define its Effect, Action and Resource.
+Effect specifies whether the action is allowed or denied.
 
-In a JSON IAM policy, Effect defines whether the action is allowed or denied. Action tells what operation is being requested, like starting an EC2 instance. Resource specifies which AWS resource the action applies to.
+Action defines the specific operation being requested, such as starting or stopping an EC2 instance (e.g., ec2:StartInstances).
+
+Resource identifies the specific AWS resource the action applies to, such as a particular EC2 instance or S3 bucket.
 
 
 
@@ -83,7 +82,7 @@ In a JSON IAM policy, Effect defines whether the action is allowed or denied. Ac
 
 An account alias is a friendly name for your account login
 
-Creating an account alias took me 30 seconfs Now, my new AWS console sign-in URL is nextwork-temi
+Creating an account alias took me 30 seconds Now, my new AWS console sign-in URL is nextwork-temi
 
 ![Image](http://learn.nextwork.org/eager_green_serene_nutmeg/uploads/aws-security-iam_0eb4439b)
 
@@ -97,7 +96,7 @@ An IAM user is a single identity created in your AWS account that represents a r
 
 ### User Groups
 
-An IAM User Group is just a container for users that lets you assign permissions in bulk.
+An IAM User Group is just a container for users, that lets you assign permissions in bulk.
 
 I attached the policy I created to this user group, which means attaching a policy to a user group gives all users in that group the permissions in the policy.
 
@@ -115,11 +114,10 @@ Once I logged in as my IAM user, I noticed access was denied This was because of
 
 ## Testing IAM Policies
 
-I tested my JSON IAM policy by going int ingognito mode and logging into the interns account and testing out the functions 
-
+ I tested my JSON IAM policy by opening an incognito browser window, logging into the intern’s account, and attempting various actions to ensure the permissions were correctly applied. This allowed me to validate that the intern could only perform the intended functions, such as managing EC2 instances tagged with Env=development and accessing read-only EC2 data.
 ### Stopping the production instance
 
-When I tried to stop the production instance it denied me This was because of the policies 
+When I attempted to stop the production instance, the action was denied due to the IAM policies in place. The policy was intentionally configured to restrict actions to only EC2 instances tagged with Env=development, which the production instance did not have.
 
 ![Image](http://learn.nextwork.org/eager_green_serene_nutmeg/uploads/aws-security-iam_0e7a9d6a)
 
@@ -129,7 +127,7 @@ When I tried to stop the production instance it denied me This was because of th
 
 ### Stopping the development instance
 
-Next, when I tried to stop the development instance it stopped This was because I had the policy permissions to do so although it is a lot of power
+Next, when I attempted to stop the development instance, the action was successful. This confirmed that the policy granted the necessary permissions for instances tagged with Env=development. While it worked as intended, it also highlighted how much control such permissions give — reinforcing the importance of setting clear, scoped access in IAM policies.
 
 ![Image](http://learn.nextwork.org/eager_green_serene_nutmeg/uploads/aws-security-iam_1811801c)
 
